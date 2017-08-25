@@ -3,16 +3,12 @@ package sotrh.games.just_run
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.Input
 import com.badlogic.gdx.graphics.Texture
-import com.badlogic.gdx.math.Vector2
 
-class Runner : Entity() {
-    init {
-        texture = Texture("badlogic.jpg")
-    }
+class Runner : Entity(Texture("runner.png")) {
 
     override fun update(delta: Float) {
 
-        val isJumpPressed = Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || Gdx.input.isButtonPressed(Input.Buttons.LEFT)
+        val isJumpPressed = Gdx.input.isKeyPressed(Input.Keys.SPACE) || Gdx.input.isButtonPressed(Input.Buttons.LEFT)
 
         // if the player is below the floor, snap them to it and set
         // vertical velocity and acceleration to 0
@@ -21,8 +17,8 @@ class Runner : Entity() {
             velocity.y = 0f
             acceleration.set(0f, 0f)
         } else if (position.y == 0f && isJumpPressed) {
-            velocity.y = texture.height * 0.5f
-            acceleration.y = texture.height * -0.5f
+            velocity.y = texture.height * 4.0f
+            acceleration.y = texture.height * -4.0f
         }
 
         super.update(delta)
